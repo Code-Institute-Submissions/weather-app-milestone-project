@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Local Weather Forecast</title>
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
@@ -22,6 +22,8 @@
                 <button type="button" class="button">Get Fahrenheit</button>
             </div>
             <h1 class="text-center">Local Weather Forecast</h1>
+            
+            <input type="search" id="city-name" value=" search city" oninput="getWeather()">
         </header>
         <div class="flex">
             <div class="temp width"></div>
@@ -34,6 +36,18 @@
             <div class="width">
                 <span class="city"></span>, <br> <span class="country"></span>
             </div>
+            
+            <div class="width move">
+                <span class="humidity"></span>
+                <br>
+                <span class="pressure"></span>
+            </div>
+            <div class="width">
+                <span class="sunrise"></span>
+                <br>
+                <span class="sunset"></span>
+            </div>
+            
         </div>
         <footer>
             <span> &copy; 2019</span>

@@ -17,10 +17,24 @@ header {
     position: fixed;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     background-color: #00004d;
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+input {
+    border-radius: 0.5rem;
+    width: 9rem;
+    height: 3rem;
+    font-family: "Pacifico", sans-serif;
+    font-weight: 200;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    background-color: #ebebe0;
+    color: #00004d;
 }
 
 h1 {
@@ -45,6 +59,7 @@ button {
     font-weight: 200;
     font-size: 1rem;
     padding: 0.5rem;
+    margin-left: 0.5rem;
     border-radius: 0.5rem;
     background-color: #00004d;
     color: #ebebe0;
@@ -78,15 +93,23 @@ button:hover {
     height: auto;
 }
 
+.move {
+    margin-top: 3rem;
+}
+
 .temp {
-    margin-top: 2rem;
+    margin-top: 6rem;
 }
 
 .temp,
 .city,
 .weatherDetail,
-.country {
-    font-size: 2rem;
+.country,
+.humidity,
+.pressure,
+.sunrise,
+.sunset {
+    font-size: 1.5rem;
 }
 
 .iconpic {
@@ -108,6 +131,19 @@ footer span {
     color: #ebebe0;
 }
 
+/*---------------------------media querry min width 768px*/
+
+@media (min-width: 768px) {
+    h1 {
+        display: block;
+        color: #ebebe0;
+        padding: 1rem;
+        margin-right: 1.5rem;
+    }
+    .temp {
+        margin-top: 10rem;
+    }
+}
 
 /*---------------------------media querry min width 992px*/
 
@@ -135,6 +171,19 @@ footer span {
         margin-right: 1.5rem;
     }
 
+    /*---------------------------header input field*/
+    input {
+        width: 15rem;
+        height: 5rem;
+        font-family: "Pacifico", sans-serif;
+        font-weight: 200;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        margin-right: 1rem;
+        border-radius: 0.5rem;
+        background-color: #ebebe0;
+        color: #00004d;
+    }
     /*---------------------------header button*/
     button {
         display: block;
@@ -177,7 +226,11 @@ footer span {
     .temp,
     .city,
     .weatherDetail,
-    .country {
+    .country,
+    .humidity,
+    .pressure,
+    .sunrise,
+    .sunset {
         font-size: 4rem;
     }
     .iconpic {
