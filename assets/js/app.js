@@ -75,7 +75,7 @@ $(document).ready(function() {
 
 /*function to search by city name*/
 function getWeather(data) {
-  $('.flex').html('');
+
   var cityName = $("#city-name").val(); //search for a city
 
   $.ajax({
@@ -84,9 +84,8 @@ function getWeather(data) {
     dataType: 'json',
     succes: function(data) {
       var city = data.city; //access city in object
-      weatherApiUrl += "?q=" + city + apiKey + "&units=metric"; //find city by using openweathermap.org
+      weatherApiUrl += "?q=" + city + apiKey; //find city by using openweathermap.org
       $('.flex').html(getWeatherData()); //call weatherdata to change data
-      getWeatherData();
     },
     error: function(err) {
       alert('Oops something went wrong, Please try again.');
