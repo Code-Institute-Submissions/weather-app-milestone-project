@@ -85,7 +85,7 @@ $(document).ready(function() {
       type: 'GET',
       dataType: 'json',
       succes: function(data) {
-        weatherUrl = `api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}&units=metric`;
+        weatherUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&APPID=" + apiKey + "&units=metric";
         getWeatherData(weatherUrl, city);
       },
       error: function(err) {
