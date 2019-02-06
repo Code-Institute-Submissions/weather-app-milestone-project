@@ -3,10 +3,10 @@ $(document).ready(function() {
   var fahrenheit, celsius;
   var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   var apiKey = "b25ca364bc04acd2ca3e3aa725eb7097"; //<weather-api-keys>
+
   getLatLong();
 
-  /* function to get user's location */
-  function getLatLong() {
+  function getLatLong(weatherUrl) {
     $.ajax({
       url: "https://geoip-db.com/json/",
       type: 'GET',
@@ -15,9 +15,8 @@ $(document).ready(function() {
         var lat = data.latitude;
         var long = data.longitude;
         $('.city').html(data.city);
-        $('.country').html(data.country_name);
-        weatherApiUrl += "?lat=" + lat + "&lon=" + long + "&APPID=" + apiKey + "&units=metric";
-        getWeatherData();
+        weatherUrl = weatherApiUrl + "?lat=" + lat + "&lon=" + long + "&APPID=" + apiKey + "&units=metric";
+        getWeatherData(weatherUrl);
       },
       error: function(err) {
         alert('Oops something went wrong, Please try again.');
@@ -25,10 +24,12 @@ $(document).ready(function() {
       }
     });
   }
-  /* function to get weather data from the user's location and users search*/
-  function getWeatherData() {
+
+
+
+  function getWeatherData(weatherUrl, city) {
     $.ajax({
-      url: weatherApiUrl,
+      url: weatherUrl,
       type: 'GET',
       dataType: 'json',
       success: function(data) {
@@ -41,6 +42,8 @@ $(document).ready(function() {
         var pressure = data.main.pressure;
         var sunrise = data.sys.sunrise;
         var sunset = data.sys.sunset;
+        city = data.city;
+        $('.city').html(city);
         $('.weatherDetail').html(weatherDetail); //update weather description in html
         $('.iconpic>img').attr('src', 'http://openweathermap.org/img/w/' + icon + '.png'); //update the icon based on weather
         $('.temp').html('temperature' + '<br>' + temprature + "&#8451;"); //update the temprature
@@ -55,8 +58,7 @@ $(document).ready(function() {
       }
     });
   }
-  /* code to toggle between celsius and fahrenheit */
-  /* adding a click event listener on the toggle button */
+
   $('.toggle .button').click(function() {
     // if the div has attribute id as c then convert temperature to fahrenheit
     if ($('.toggle').attr('id') == 'c') {
@@ -71,25 +73,26 @@ $(document).ready(function() {
       $(".button").html("Get Fahrenheit");
     }
   });
-});
 
-/*function to search by city name*/
-function getWeather(data) {
-
-  var cityName = $("#city-name").val(); //search for a city
-
-  $.ajax({
-    url: "https://geoip-db.com/json/" + cityName, //api for location of the city
-    type: 'GET',
-    dataType: 'json',
-    succes: function(data) {
-      var city = data.city; //access city in object
-      weatherApiUrl += "?q=" + city + apiKey; //find city by using openweathermap.org
-      $('.flex').html(getWeatherData()); //call weatherdata to change data
-    },
-    error: function(err) {
-      alert('Oops something went wrong, Please try again.');
-      console.log(err);
-    }
+  $("#city-name").submit(function(e) {
+    e.preventDeafult();
+    var cityName = $("#city-name").val();
+    getWeather(weatherUrl, city);
   });
-}
+
+  function getWeather(weatherUrl, city) {
+    $.ajax({
+      url: weatherUrl,
+      type: 'GET',
+      dataType: 'json',
+      succes: function(data) {
+        weatherUrl = `api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}&units=metric`;
+        getWeatherData(weatherUrl, city);
+      },
+      error: function(err) {
+        alert('Oops something went wrong, Please try again.');
+        console.log(err);
+      }
+    });
+  }
+});
