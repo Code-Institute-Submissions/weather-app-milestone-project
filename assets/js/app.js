@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   getLatLong();
 
-  function getLatLong(weatherUrl) {
+  function getLatLong(weatherUrl, city) {
     $.ajax({
       url: "https://geoip-db.com/json/",
       type: 'GET',
@@ -14,7 +14,8 @@ $(document).ready(function() {
       success: function(data) {
         var lat = data.latitude;
         var long = data.longitude;
-        $('.city').html(data.city);
+        city = data.city;
+        $('.city').html(city);
         weatherUrl = weatherApiUrl + "?lat=" + lat + "&lon=" + long + "&APPID=" + apiKey + "&units=metric";
         getWeatherData(weatherUrl);
       },
@@ -25,9 +26,7 @@ $(document).ready(function() {
     });
   }
 
-
-
-  function getWeatherData(weatherUrl, city) {
+  function getWeatherData(weatherUrl) {
     $.ajax({
       url: weatherUrl,
       type: 'GET',
@@ -75,9 +74,9 @@ $(document).ready(function() {
   });
 
   $("#city-name").submit(function(e) {
-    e.preventDeafult();
+    e.preventDefault();
     var cityName = $("#city-name").val();
-    getWeather(weatherUrl, city);
+    getWeather(weatherUrl, cityName);
   });
 
   function getWeather(weatherUrl, city) {
