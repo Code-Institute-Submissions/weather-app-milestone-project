@@ -26,6 +26,29 @@ $(document).ready(function() {
     });
   }
 
+  $("#city").submit(function(e) {
+    e.preventDefault();
+    var cityName = $("#city").val();
+    weatherUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&APPID=" + apiKey + "&units=metric";
+    getWeather(weatherUrl, cityName);
+  });
+  
+  function getWeather(weatherUrl, city) {
+    $.ajax({
+      url: weatherUrl,
+      type: 'GET',
+      dataType: 'json',
+      succes: function(data) {
+        weatherUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&APPID=" + apiKey + "&units=metric";
+        getWeatherData(weatherUrl, city);
+      },
+      error: function(err) {
+        alert('Oops something went wrong, Please try again.');
+        console.log(err);
+      }
+    });
+  }
+
   function getWeatherData(weatherUrl) {
     $.ajax({
       url: weatherUrl,
@@ -72,26 +95,4 @@ $(document).ready(function() {
       $(".button").html("Get Fahrenheit");
     }
   });
-
-  $("#city-name").submit(function(e) {
-    e.preventDefault();
-    var cityName = $("#city-name").val();
-    getWeather(weatherUrl, cityName);
-  });
-
-  function getWeather(weatherUrl, city) {
-    $.ajax({
-      url: weatherUrl,
-      type: 'GET',
-      dataType: 'json',
-      succes: function(data) {
-        weatherUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&APPID=" + apiKey + "&units=metric";
-        getWeatherData(weatherUrl, city);
-      },
-      error: function(err) {
-        alert('Oops something went wrong, Please try again.');
-        console.log(err);
-      }
-    });
-  }
 });
