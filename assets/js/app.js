@@ -1,23 +1,20 @@
 $(document).ready(function() {
-  //put variables into local scope
   var fahrenheit, celsius;
-  var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
+  const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   var apiKey = "b25ca364bc04acd2ca3e3aa725eb7097"; //<weather-api-keys>
-
   getLatLong();
 
-  function getLatLong(weatherUrl, city) {
+  function getLatLong() {
     $.ajax({
       url: "https://geoip-db.com/json/",
       type: 'GET',
       dataType: 'json',
       success: function(data) {
-        var lat = data.latitude;
-        var long = data.longitude;
-        city = data.city;
-        $('.city').html(city);
-        weatherUrl = weatherApiUrl + "?lat=" + lat + "&lon=" + long + "&APPID=" + apiKey + "&units=metric";
-        getWeatherData(weatherUrl);
+        var lat = data.latitude; //access latitude 
+        var long = data.longitude; //access longitude
+        let weatherUrl = weatherApiUrl + "?lat=" + lat + "&lon=" + long + "&APPID=" + apiKey + "&units=metric"; //Change weather 
+        //in local scope
+        getWeatherData(weatherUrl, data.city); //get data to show in browser. Access city as argument?
       },
       error: function(err) {
         alert('Oops something went wrong, Please try again.');
@@ -25,33 +22,21 @@ $(document).ready(function() {
       }
     });
   }
-
-  $("#city").submit(function(e) {
+  $("#searchCity").submit(function(e) {
     e.preventDefault();
-    var cityName = $("#city").val();
-    weatherUrl = "api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + apiKey + "&units=metric";
-    getWeather(weatherUrl, cityName);
+    let cityName = $("#city-name").val();
+    getWeather(cityName);
   });
-  
-  function getWeather(weatherUrl, city) {
-    $.ajax({
-      url: weatherUrl,
-      type: 'GET',
-      dataType: 'json',
-      succes: function(data) {
-        let weatherUrl = "api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + apiKey + "&units=metric";
-        getWeatherData(weatherUrl, city);
-      },
-      error: function(err) {
-        alert('Oops something went wrong, Please try again.');
-        console.log(err);
-      }
-    });
+
+  function getWeather(cityName) {
+    console.log(cityName);
+    weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}&units=metric`;
+    getWeatherData(weatherUrl, cityName); //is cityName assgined to the city parameter?
   }
 
-  function getWeatherData(weatherUrl) {
+  function getWeatherData(weatherUrl, city) { //data function
     $.ajax({
-      url: weatherUrl,
+      url: weatherUrl, //Not sure where am getting this info from, is the content of this parameter assigned in the getWeather //function?
       type: 'GET',
       dataType: 'json',
       success: function(data) {
@@ -64,7 +49,6 @@ $(document).ready(function() {
         var pressure = data.main.pressure;
         var sunrise = data.sys.sunrise;
         var sunset = data.sys.sunset;
-        city = data.city;
         $('.city').html(city);
         $('.weatherDetail').html(weatherDetail); //update weather description in html
         $('.iconpic>img').attr('src', 'http://openweathermap.org/img/w/' + icon + '.png'); //update the icon based on weather
