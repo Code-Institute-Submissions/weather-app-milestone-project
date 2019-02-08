@@ -31,10 +31,23 @@ $(document).ready(function() {
   function getWeather(cityName) {
     console.log(cityName);
     let weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}&units=metric`;
-    getWeatherData(weatherUrl, cityName); //is cityName assgined to the city parameter?
+    getWeatherData(weatherUrl, cityName);
   }
 
-  function getWeatherData(weatherUrl, city) { //data function
+  function formatTime(time) {
+
+    let date = new Date(time * 1000);
+    // Hours part from the timestamp
+    let hours = date.getHours();
+    // Minutes part from the timestamp
+    let minutes = "0" + date.getMinutes();
+    // Will display time in 10:30:23 format
+    let formattedTime = hours + ':' + minutes.substr(-2);
+    return formattedTime;
+
+  }
+
+  function getWeatherData(weatherUrl, city) {
     $.ajax({
       url: weatherUrl,
       type: `GET`,
@@ -49,14 +62,15 @@ $(document).ready(function() {
         var pressure = data.main.pressure;
         var sunrise = data.sys.sunrise;
         var sunset = data.sys.sunset;
+
         $(`.city`).html(`City<br>${city}`);
         $(`.weatherDetail`).html(weatherDetail);
         $(`.iconpic>img`).attr(`src`, `http://openweathermap.org/img/w/${icon}.png`); //update the icon based on weather
         $('.temp').html(`temperature<br>${temprature}&#8451;`); //update the temprature
         $('.humidity').html(`Humidity: ${humidity}%`);
         $('.pressure').html(`Pressure: ${pressure}`);
-        $('.sunrise').html(`Sunrise: ${sunrise}`);
-        $('.sunset').html(`Sunset: ${sunset}`);
+        $('.sunrise').html(`Sunrise: ${formatTime(sunrise)}`);
+        $('.sunset').html(`Sunset: ${formatTime(sunset)}`);
       },
       error: function(err) {
         alert(`Please type a City name`);
@@ -68,7 +82,7 @@ $(document).ready(function() {
   $(`.toggle .button`).click(function() {
     // if the div has attribute id as c then convert temperature to fahrenheit
     if ($(`.toggle`).attr(`id`) == `c`) {
-      $(`.temp`).html(`temperature<br>${fahrenheit}&#8457;` );
+      $(`.temp`).html(`temperature<br>${fahrenheit}&#8457;`);
       $(`.toggle`).attr(`id`, `f`);
       $(`.button`).html(`Get Celsius`);
     }
