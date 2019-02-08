@@ -1,7 +1,7 @@
 $(document).ready(function() {
   var fahrenheit, celsius;
   const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather`;
-  var apiKey = `b25ca364bc04acd2ca3e3aa725eb7097`; //<weather-api-keys>
+  var apiKey = `b25ca364bc04acd2ca3e3aa725eb7097`;
   getLatLong();
 
   function getLatLong() {
@@ -12,9 +12,8 @@ $(document).ready(function() {
       success: function(data) {
         var lat = data.latitude;
         var long = data.longitude;
-        let weatherUrl = `${weatherApiUrl}?lat=${lat}&lon=${long}&APPID=${apiKey}&units=metric`; //Change weather 
-        //in local scope
-        getWeatherData(weatherUrl, data.city); //get data to show in browser. Access city as argument?
+        let weatherUrl = `${weatherApiUrl}?lat=${lat}&lon=${long}&APPID=${apiKey}&units=metric`;
+        getWeatherData(weatherUrl, data.city);
       },
       error: function(err) {
         alert(`Oops something went wrong, Please try again.`);
@@ -42,7 +41,7 @@ $(document).ready(function() {
     // Minutes part from the timestamp
     let minutes = "0" + date.getMinutes();
     // Will display time in 10:30:23 format
-    let formattedTime = hours + ':' + minutes.substr(-2);
+    let formattedTime = `${hours}:${minutes.substr(-2)}`;
     return formattedTime;
 
   }
@@ -65,8 +64,8 @@ $(document).ready(function() {
 
         $(`.city`).html(`City<br>${city}`);
         $(`.weatherDetail`).html(weatherDetail);
-        $(`.iconpic>img`).attr(`src`, `http://openweathermap.org/img/w/${icon}.png`); //update the icon based on weather
-        $('.temp').html(`temperature<br>${temprature}&#8451;`); //update the temprature
+        $(`.iconpic>img`).attr(`src`, `http://openweathermap.org/img/w/${icon}.png`);
+        $('.temp').html(`temperature<br>${temprature}&#8451;`);
         $('.humidity').html(`Humidity: ${humidity}%`);
         $('.pressure').html(`Pressure: ${pressure}`);
         $('.sunrise').html(`Sunrise: ${formatTime(sunrise)}`);
