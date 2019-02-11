@@ -4,6 +4,7 @@
 
 /*-------------------------mobile design*/
 
+
 body {
     margin: 0;
     font-family: "Pacifico", sans-serif;
@@ -81,9 +82,9 @@ button:hover {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    margin: 0;
+    margin-bottom: 1.5rem;
     color: #00004d;
-    height: 100vh;
+   /* height: 100vh;*/
 }
 
 .width {
@@ -111,7 +112,9 @@ button:hover {
 .sunset {
     font-size: 1.5rem;
 }
-
+.city {
+    text-transform: capitalize;
+}
 .iconpic {
     text-align: center;
 }
@@ -119,11 +122,12 @@ button:hover {
 /*---------------------------footer*/
 
 footer {
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
     font-size: 1.5rem;
     margin: 0;
     background-color: #00004d;
     color: #ebebe0;
-    padding: 1rem;
 }
 
 footer span {
@@ -141,8 +145,9 @@ footer span {
         margin-right: 1.5rem;
     }
     .temp {
-        margin-top: 10rem;
+        margin-top: 12rem;
     }
+    
 }
 
 /*---------------------------media querry min width 992px*/

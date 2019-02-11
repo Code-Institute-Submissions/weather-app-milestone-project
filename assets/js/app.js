@@ -21,6 +21,7 @@ $(document).ready(function() {
       }
     });
   }
+
   $(`#searchCity`).submit(function(e) {
     e.preventDefault();
     let cityName = $(`#city-name`).val();
@@ -31,19 +32,6 @@ $(document).ready(function() {
     console.log(cityName);
     let weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}&units=metric`;
     getWeatherData(weatherUrl, cityName);
-  }
-
-  function formatTime(time) {
-
-    let date = new Date(time * 1000);
-    // Hours part from the timestamp
-    let hours = date.getHours();
-    // Minutes part from the timestamp
-    let minutes = "0" + date.getMinutes();
-    // Will display time in 10:30:23 format
-    let formattedTime = `${hours}:${minutes.substr(-2)}`;
-    return formattedTime;
-
   }
 
   function getWeatherData(weatherUrl, city) {
@@ -66,16 +54,26 @@ $(document).ready(function() {
         $(`.weatherDetail`).html(weatherDetail);
         $(`.iconpic>img`).attr(`src`, `http://openweathermap.org/img/w/${icon}.png`);
         $('.temp').html(`temperature<br>${temprature}&#8451;`);
-        $('.humidity').html(`Humidity: ${humidity}%`);
-        $('.pressure').html(`Pressure: ${pressure}`);
-        $('.sunrise').html(`Sunrise: ${formatTime(sunrise)}`);
-        $('.sunset').html(`Sunset: ${formatTime(sunset)}`);
+        $('.humidity').html(`Humidity <br> ${humidity}%`);
+        $('.pressure').html(`Pressure <br> ${pressure}`);
+        $('.sunrise').html(`Sunrise <br> ${formatTime(sunrise)}`);
+        $('.sunset').html(`Sunset <br> ${formatTime(sunset)}`);
       },
       error: function(err) {
         alert(`Please type a City name`);
         console.log(err);
       }
     });
+  }
+
+  function formatTime(time) {
+
+    let date = new Date(time * 1000);
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+    let formattedTime = `${hours}:${minutes.substr(-2)}`;
+    return formattedTime;
+
   }
 
   $(`.toggle .button`).click(function() {
