@@ -90,4 +90,4 @@ $(document).ready(function() {
       $(`.button`).html(`Get Fahrenheit`);
     }
   });
-});
+})
