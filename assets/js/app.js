@@ -53,7 +53,7 @@ $(document).ready(function() {
         $(`.city`).html(`City<br>${city}`);
         $(`.weatherDetail`).html(weatherDetail);
         $(`.iconpic>img`).attr(`src`, `http://openweathermap.org/img/w/${icon}.png`);
-        $('.temp').html(`temperature<br>${temprature}&#8451;`);
+        $('.temp').html(`Temperature<br>${temprature}&#8451;`);
         $('.humidity').html(`Humidity <br> ${humidity}%`);
         $('.pressure').html(`Pressure <br> ${pressure}`);
         $('.sunrise').html(`Sunrise <br> ${formatTime(sunrise)}`);
