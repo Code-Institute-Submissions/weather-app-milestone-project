@@ -49,7 +49,7 @@ $(document).ready(function() {
         var pressure = data.main.pressure;
         var sunrise = data.sys.sunrise;
         var sunset = data.sys.sunset;
-
+        
         $(`.city`).html(`City<br>${city}`);
         $(`.weatherDetail`).html(weatherDetail);
         $(`.iconpic>img`).attr(`src`, `http://openweathermap.org/img/w/${icon}.png`);
@@ -66,14 +66,16 @@ $(document).ready(function() {
     });
   }
 
-  function formatTime(time) {
-
+function formatTime(time) {
+    
     let date = new Date(time * 1000);
     let hours = date.getHours();
     let minutes = "0" + date.getMinutes();
-    let formattedTime = `${hours}:${minutes.substr(-2)}`;
-    return formattedTime;
+    let offset = new Date(time).getTimezoneOffset() / 60;
+    let formattedTime = `${hours}:${minutes.substr(-2)} GMT ${offset}`;
 
+    return formattedTime;
+    
   }
 
   $(`.toggle .button`).click(function() {
