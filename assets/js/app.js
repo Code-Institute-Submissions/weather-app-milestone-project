@@ -1,3 +1,15 @@
+function formatTime(time) {
+
+  console.log(time);
+  let date = new Date(time * 1000);
+  let hours = date.getHours();
+  let minutes = "0" + date.getMinutes();
+  let offset = new Date(time).getTimezoneOffset() / 60;
+  let formattedTime = `${hours}:${minutes.substr(-2)} GMT ${offset}`;
+  console.log(formattedTime);
+  return formattedTime;
+
+}
 $(document).ready(function() {
   var fahrenheit, celsius;
   const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather`;
@@ -49,7 +61,7 @@ $(document).ready(function() {
         var pressure = data.main.pressure;
         var sunrise = data.sys.sunrise;
         var sunset = data.sys.sunset;
-        
+
         $(`.city`).html(`City<br>${city}`);
         $(`.weatherDetail`).html(weatherDetail);
         $(`.iconpic>img`).attr(`src`, `http://openweathermap.org/img/w/${icon}.png`);
@@ -65,19 +77,6 @@ $(document).ready(function() {
       }
     });
   }
-
-function formatTime(time) {
-    
-    let date = new Date(time * 1000);
-    let hours = date.getHours();
-    let minutes = "0" + date.getMinutes();
-    let offset = new Date(time).getTimezoneOffset() / 60;
-    let formattedTime = `${hours}:${minutes.substr(-2)} GMT ${offset}`;
-
-    return formattedTime;
-    
-  }
-
   $(`.toggle .button`).click(function() {
     // if the div has attribute id as c then convert temperature to fahrenheit
     if ($(`.toggle`).attr(`id`) == `c`) {
@@ -92,4 +91,4 @@ function formatTime(time) {
       $(`.button`).html(`Get Fahrenheit`);
     }
   });
-})
+});
