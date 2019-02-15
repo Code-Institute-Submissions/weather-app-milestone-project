@@ -12,7 +12,7 @@ The user can:
 * Get the weather of his location through his IP adress
 * Search for the weather of a different city trhrough the search bar on the right upper corner.
 
-Wire frames of the project can be found here: [Github Wireframes](https://github.com/Geronimo1992/weather-app-milestone-project/tree/master/assets/Wireframes)
+Wire frames of the project can be found here: [Github Wireframes](https://github.com/Geronimo1992/weather-app-milestone-project/tree/master/assets/wireframes)
 
 
 # Features
