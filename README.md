@@ -37,7 +37,7 @@ Features:
 * JavaScript has been checked by a syntax validator calld [Esprima](http://esprima.org/demo/validate.html)
 * Website has also been tested manually by searching for a city and getting the correct ouput. 
 * Multiple console logs have been performed during coding process to check for errors and to check whether evrything works as it should.
-* 
+* Unit testing on formatTime function can be found [here](https://weather-app-milestone-project-geronimo1992.c9users.io/test.html)
 
 
 # Deployment

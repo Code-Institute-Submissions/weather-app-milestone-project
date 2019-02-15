@@ -1,12 +1,10 @@
 function formatTime(time) {
 
-  console.log(time);
   let date = new Date(time * 1000);
   let hours = date.getHours();
   let minutes = "0" + date.getMinutes();
   let offset = new Date(time).getTimezoneOffset() / 60;
   let formattedTime = `${hours}:${minutes.substr(-2)} GMT ${offset}`;
-  console.log(formattedTime);
   return formattedTime;
 
 }
